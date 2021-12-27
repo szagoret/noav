@@ -10,7 +10,8 @@
         "composers": "Composers",
         "arrangers": "Arrangers",
         "orchestrators": "Orchestrators",
-        "clear": "Clear"
+        "clear": "Clear",
+        "authors": "Authors"
       },
       "toolbar": {
         "sortBy": "Sort By",
