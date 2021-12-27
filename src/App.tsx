@@ -5,7 +5,7 @@ import DefaultLayout from "src/layout/DefaultLayout";
 import SongPage from "src/pages/notes/SongPage";
 import SaveSongPage from "src/pages/notes/SaveSongPage";
 import Administration from "src/pages/admin/Administration";
-
+import './i18n/config';
 const App = () => {
 
 

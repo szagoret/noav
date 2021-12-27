@@ -10,10 +10,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import SettingsIcon from '@mui/icons-material/Settings';
+import {useTranslation} from "react-i18next";
 
 const TopBar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-    const pages = ['Notes', 'Learning', 'Photos'];
+    const {t} = useTranslation();
+    const pages = [t('pages.songs.title'), t('pages.learning.title'), t('pages.photos.title')];
     const navigate = useNavigate();
 
     const toggleDrawer = () => setIsDrawerOpen(prev => !prev);
@@ -38,7 +40,7 @@ const TopBar = () => {
                             md: 'block'
                         }
                     }} to="/">
-                        Noten Archive
+                        {t('brandTitle')}
                     </Button>
                     <Grid container sx={{
                         display: 'flex',

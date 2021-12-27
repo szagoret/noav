@@ -1,0 +1,29 @@
+{
+  "brandTitle": "NOTEN ARCHIVE",
+  "pages": {
+    "songs": {
+      "title": "NOTES",
+      "common": {
+        "instruments": "Instruments",
+        "topics": "Topics",
+        "vocals": "Vocals",
+        "composers": "Composers",
+        "arrangers": "Arrangers",
+        "orchestrators": "Orchestrators",
+        "clear": "Clear"
+      },
+      "toolbar": {
+        "sortBy": "Sort By",
+        "title": "Title",
+        "publishDate": "Publish Date",
+        "pageSize": "Page Size"
+      }
+    },
+    "learning": {
+      "title": "LEARNING"
+    },
+    "photos": {
+      "title": "PHOTOS"
+    }
+  }
+}

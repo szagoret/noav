@@ -2,6 +2,7 @@ import {Card, CardContent, Typography} from "@mui/material";
 import {SongType} from "src/types/SongType";
 import {join, map} from 'lodash';
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 interface SongCardProps {
     song: SongType
@@ -9,6 +10,7 @@ interface SongCardProps {
 
 const SongCard = ({song}: SongCardProps) => {
     const navigate = useNavigate();
+    const {t} = useTranslation();
     return (
         <Card variant="outlined" sx={{
             height: '180px',
@@ -26,35 +28,35 @@ const SongCard = ({song}: SongCardProps) => {
                 {
                     !!song.composers.length && (
                         <Typography sx={{fontSize: 12, mb: 0}} color="text.secondary" variant={"subtitle2"} paragraph>
-                            Composers: {join(map(song.composers, 'name'), ', ')}
+                            {t('pages.songs.common.composers')}: {join(map(song.composers, 'name'), ', ')}
                         </Typography>
                     )
                 }
                 {
                     !!song.arrangers.length && (
                         <Typography sx={{fontSize: 12, mb: 0}} color="text.secondary" variant={"subtitle2"} paragraph>
-                            Arrangers: {join(map(song.arrangers, 'name'), ', ')}
+                            {t('pages.songs.common.arrangers')}: {join(map(song.arrangers, 'name'), ', ')}
                         </Typography>
                     )
                 }
                 {
                     !!song.orchestrators.length && (
                         <Typography sx={{fontSize: 12, mb: 0}} color="text.secondary" variant={"subtitle2"} paragraph>
-                            Orchestrators: {join(map(song.orchestrators, 'name'), ', ')}
+                            {t('pages.songs.common.orchestrators')}: {join(map(song.orchestrators, 'name'), ', ')}
                         </Typography>
                     )
                 }
                 {
                     !!song.topics.length && (
                         <Typography sx={{fontSize: 12, mb: 0}} color="text.secondary" variant={"subtitle2"} paragraph>
-                            Topics: {join(map(song.topics, 'title'), ', ')}
+                            {t('pages.songs.common.topics')}: {join(map(song.topics, 'title'), ', ')}
                         </Typography>
                     )
                 }
                 {
                     !!song.instruments.length && (
                         <Typography sx={{fontSize: 12, mb: 0}} color="text.secondary" variant={"subtitle2"} paragraph>
-                            Instruments: {join(map(song.instruments, 'title'), ', ')}
+                            {t('pages.songs.common.instruments')}: {join(map(song.instruments, 'title'), ', ')}
                         </Typography>
                     )
                 }

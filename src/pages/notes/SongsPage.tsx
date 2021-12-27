@@ -11,7 +11,8 @@ import {
     Select,
     SelectChangeEvent,
     ToggleButton,
-    ToggleButtonGroup
+    ToggleButtonGroup,
+    Typography
 } from "@mui/material";
 import AdvancedFilters from "src/components/AdvancedFilters";
 import {
@@ -28,6 +29,7 @@ import React from "react";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SongsPageGridSkeleton from "src/pages/notes/SongsPageGridSkeleton";
+import {useTranslation} from "react-i18next";
 
 const SongsPage = () => {
     const {
@@ -56,9 +58,11 @@ const SongsPage = () => {
         sort: `${sortField},${sortDirection}`
     });
     const dispatch = useAppDispatch();
-
+    const {t} = useTranslation();
     return (
         <Box>
+            <Typography>
+            </Typography>
             <AdvancedFilters/>
             <Box sx={{display: 'flex', flexGrow: 1, alignItems: 'center', flexWrap: 'wrap'}}>
                 <FormControl size={"small"} sx={{width: 200, m: 1}}>
@@ -66,10 +70,10 @@ const SongsPage = () => {
                     <Select labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={sortField}
-                            label="Sort By"
+                            label={t('pages.songs.toolbar.sortBy')}
                             onChange={(event: SelectChangeEvent) => dispatch(setSortFieldFilter(event.target.value))}>
-                        <MenuItem value={"title"}>Title</MenuItem>
-                        <MenuItem value={"publishDate"}>Publication date</MenuItem>
+                        <MenuItem value={"title"}>{t('pages.songs.toolbar.title')}</MenuItem>
+                        <MenuItem value={"publishDate"}>{t('pages.songs.toolbar.publishDate')}</MenuItem>
                     </Select>
                 </FormControl>
                 <FormControl size={"small"} sx={{width: 100, m: 1}}>
@@ -77,7 +81,7 @@ const SongsPage = () => {
                     <Select labelId="demo-simple-select-label1"
                             id="demo-simple-select1"
                             value={((size || 20).toString())}
-                            label="Page size"
+                            label={t('pages.songs.toolbar.pageSize')}
                             onChange={(event: SelectChangeEvent) => dispatch(setPageSizeFilter(event.target.value))}>
                         <MenuItem value={20}>20</MenuItem>
                         <MenuItem value={50}>50</MenuItem>
