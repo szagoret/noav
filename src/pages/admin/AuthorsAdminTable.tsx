@@ -4,11 +4,13 @@ import {
     useRemoveAuthorMutation,
     useSaveAuthorMutation
 } from "src/services/songAuthorsApiService";
+import {useTranslation} from "react-i18next";
 
 const AuthorsAdminTable = () => {
     const {data: authors, isFetching} = useFindAllAuthorsQuery();
     const [saveAuthor] = useSaveAuthorMutation();
     const [removeAuthor] = useRemoveAuthorMutation();
+    const {t} = useTranslation();
 
     return (
         <GenericSongPropertyTable
@@ -17,7 +19,7 @@ const AuthorsAdminTable = () => {
             saveItem={saveAuthor}
             deleteItem={(id) => removeAuthor({authorId: id})}
             valueKey={'name'}
-            valueLabel={'Author'}
+            valueLabel={t('pages.songs.common.author')}
         />
     );
 };

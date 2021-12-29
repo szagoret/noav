@@ -1,58 +1,59 @@
 {
   "brandTitle": "NOTEN ARCHIVE",
   "common": {
-    "add": "Add",
-    "deleteConfirmation": "Are you sure that you want to delete",
-    "edit": "Edit",
-    "save": "Save",
-    "yes": "Yes",
-    "no": "No",
-    "delete": "Delete",
+    "add": "Hinzufügen",
+    "deleteConfirmation": "Sind Sie sicher, dass Sie es löschen möchten?",
+    "edit": "Bearbeiten",
+    "save": "Speichern",
+    "yes": "Ja",
+    "no": "Nein",
+    "delete": "Löschen",
     "errors": {
-      "reference_constraint_error": "Could not remove, this item is in use",
-      "invalid_object_id": "Provided id is invalid",
-      "bad_request": "Bad request",
-      "generic_error": "Something was wrong",
-      "1": "Something was wrong"
+      "reference_constraint_error": "Konnte nicht entfernt werden, dieses Element wird verwendet",
+      "invalid_object_id": "Die angegebene ID ist ungültig",
+      "bad_request": "Schlechte Anfrage",
+      "generic_error": "Etwas stimmte nicht",
+      "1": "Etwas stimmte nicht"
     }
   },
   "pages": {
     "songs": {
       "title": "NOTES",
       "common": {
-        "removeAll": "Remove All",
-        "selectFiles": "Select Files",
-        "uploadFiles": "Upload Files",
-        "songTitle": "Song title",
-        "addSong": "Add Song",
-        "addSongProperty": "Add {{property}}",
-        "searchPlaceholder": "Search...",
-        "title": "Title",
-        "publishDate": "Publish Date",
-        "instruments": "Instruments",
+        "removeAll": "Alle entfernen",
+        "selectFiles": "Dateien auswählen",
+        "uploadFiles": "Dateien hochladen",
+        "songTitle": "Songtitel",
+        "addSong": "Song hinzufügen",
+        "addSongProperty": "{{property}} hinzufügen",
+        "searchPlaceholder": "Suche...",
+        "title": "Titel",
+        "publishDate": "Veröffentlichungsdatum",
+        "instruments": "Instrumente",
         "instrument": "Instrument",
-        "topics": "Topics",
-        "topic": "Topic",
-        "vocals": "Vocals",
-        "vocal": "Vocal",
-        "composers": "Composers",
-        "arrangers": "Arrangers",
-        "orchestrators": "Orchestrators",
-        "clear": "Clear",
-        "authors": "Authors"
+        "topics": "Themen",
+        "topic": "Thema",
+        "vocals": "Besetzung",
+        "vocal": "Besetzung",
+        "composers": "Komponisten",
+        "arrangers": "Arrangeure",
+        "orchestrators": "Orchester",
+        "clear": "Löschen",
+        "authors": "Autoren",
+        "author": "Autor"
       },
       "toolbar": {
-        "sortBy": "Sort By",
-        "title": "Title",
-        "publishDate": "Publish Date",
-        "pageSize": "Page Size"
+        "sortBy": "Sortieren nach",
+        "title": "Titel",
+        "publishDate": "Veröffentlichungsdatum",
+        "pageSize": "Seitengröße"
       }
     },
     "learning": {
-      "title": "LEARNING"
+      "title": "LERNEN"
     },
     "photos": {
-      "title": "PHOTOS"
+      "title": "FOTOS"
     }
   }
 }

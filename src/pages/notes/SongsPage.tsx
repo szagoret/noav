@@ -65,7 +65,7 @@ const SongsPage = () => {
             </Typography>
             <AdvancedFilters/>
             <Box sx={{display: 'flex', flexGrow: 1, alignItems: 'center', flexWrap: 'wrap'}}>
-                <FormControl size={"small"} sx={{width: 200, m: 1}}>
+                <FormControl size={"small"} sx={{width: 240, m: 1}}>
                     <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
                     <Select labelId="demo-simple-select-label"
                             id="demo-simple-select"
