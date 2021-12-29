@@ -10,11 +10,11 @@ import {useTranslation} from "react-i18next";
 import {join, map} from "lodash";
 
 interface SongsListViewProps {
-    data: PaginatedResultType<SongType>,
+    data?: PaginatedResultType<SongType>,
     loading: boolean
 }
 
-const SongsListView = ({data: {content: songs, numberOfElements}, loading}: SongsListViewProps) => {
+const SongsListView = ({data, loading}: SongsListViewProps) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
@@ -24,7 +24,8 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             headerName: t('pages.songs.common.title'),
             minWidth: 200,
             sortable: false,
-            filterable: false
+            filterable: false,
+            disableColumnMenu: true
         },
         {
             field: "composers",
@@ -32,7 +33,8 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             minWidth: 200,
             sortable: false,
             filterable: false,
-            valueGetter: (({row}) => join(map(row.composers, 'name'), ', '))
+            valueGetter: (({row}) => join(map(row.composers, 'name'), ', ')),
+            disableColumnMenu: true
         },
         {
             field: "arrangers",
@@ -40,7 +42,8 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             minWidth: 200,
             sortable: false,
             filterable: false,
-            valueGetter: (({row}) => join(map(row.arrangers, 'name'), ', '))
+            valueGetter: (({row}) => join(map(row.arrangers, 'name'), ', ')),
+            disableColumnMenu: true
         },
         {
             field: "orchestrators",
@@ -48,7 +51,8 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             minWidth: 200,
             sortable: false,
             filterable: false,
-            valueGetter: (({row}) => join(map(row.orchestrators, 'name'), ', '))
+            valueGetter: (({row}) => join(map(row.orchestrators, 'name'), ', ')),
+            disableColumnMenu: true
         },
         {
             field: "topics",
@@ -56,7 +60,8 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             minWidth: 200,
             sortable: false,
             filterable: false,
-            valueGetter: (({row}) => join(map(row.topics, 'title'), ', '))
+            valueGetter: (({row}) => join(map(row.topics, 'title'), ', ')),
+            disableColumnMenu: true
         },
         {
             field: "instruments",
@@ -64,23 +69,25 @@ const SongsListView = ({data: {content: songs, numberOfElements}, loading}: Song
             minWidth: 200,
             sortable: false,
             filterable: false,
-            valueGetter: (({row}) => join(map(row.instruments, 'title'), ', '))
+            valueGetter: (({row}) => join(map(row.instruments, 'title'), ', ')),
+            disableColumnMenu: true
         },
         {
             field: "publishDate",
             headerName: t('pages.songs.common.publishDate'),
             minWidth: 200,
             sortable: false,
-            filterable: false
+            filterable: false,
+            disableColumnMenu: true
         }
     ];
 
     return (
         <Paper style={{height: 600, width: '100%'}}>
-            <DataGrid rows={songs || []}
+            <DataGrid rows={data?.content || []}
                       columns={columns}
                       loading={loading}
-                      rowCount={numberOfElements}
+                      rowCount={data?.numberOfElements}
                       paginationMode="server"
                       onRowClick={(params => navigate(`/songs/${params.row.code}`))}
                       onPageChange={(page) => dispatch(setPageFilter(page - 1))}

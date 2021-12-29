@@ -8,11 +8,11 @@ import {setPageFilter} from "src/store/song/songAdvancedFiltersSlice";
 import {useAppDispatch} from "src/hooks/reduxHooks";
 
 interface SongsGridViewProps {
-    data: PaginatedResultType<SongType>,
+    data?: PaginatedResultType<SongType>,
     loading: boolean
 }
 
-const SongsGridView = ({data: {content: songs, totalPages}, loading}: SongsGridViewProps) => {
+const SongsGridView = ({data, loading}: SongsGridViewProps) => {
     const dispatch = useAppDispatch();
     return (
         <>
@@ -23,14 +23,14 @@ const SongsGridView = ({data: {content: songs, totalPages}, loading}: SongsGridV
                     </Grid>)
             }
             <Grid container spacing={1} sx={{pb: 2, pt: 2}}>
-                {songs.map((song, i) => (
+                {data?.content?.map((song, i) => (
                     <Grid item key={i} xs={12} md={4} lg={3}>
                         <SongCard song={song}/>
                     </Grid>
                 ))}
             </Grid>
             <Box sx={{display: 'flex', justifyContent: 'center', p: 2}}>
-                <Pagination count={totalPages}
+                <Pagination count={data?.totalPages}
                             onChange={(event: React.ChangeEvent<unknown>, pageNumber: number) => dispatch(setPageFilter(pageNumber - 1))}/>
             </Box>
         </>

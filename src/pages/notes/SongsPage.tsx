@@ -108,9 +108,9 @@ const SongsPage = () => {
                 </ToggleButtonGroup>
             </Box>
             {
-                data && (viewMode === 'grid' ?
+                viewMode === 'grid' ?
                     <SongsGridView data={data} loading={isFetching}/>
-                    : <SongsListView data={data} loading={isFetching}/>)
+                    : <SongsListView data={data} loading={isFetching}/>
             }
         </Box>
     );
