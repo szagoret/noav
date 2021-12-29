@@ -1,10 +1,12 @@
 import GenericSongPropertyTable from "src/pages/admin/GenericSongPropertyTable";
 import {useFindAllTopicsQuery, useRemoveTopicMutation, useSaveTopicMutation} from "src/services/songTopicsApiService";
+import {useTranslation} from "react-i18next";
 
 const TopicsAdminTable = () => {
     const {data: topics, isFetching} = useFindAllTopicsQuery();
     const [saveTopic] = useSaveTopicMutation();
     const [removeTopic] = useRemoveTopicMutation();
+    const {t} = useTranslation()
 
     return (
         <GenericSongPropertyTable
@@ -13,7 +15,7 @@ const TopicsAdminTable = () => {
             saveItem={saveTopic}
             deleteItem={(id) => removeTopic({topicId: id})}
             valueKey={'title'}
-            valueLabel={'Topic'}
+            valueLabel={t('pages.songs.common.topic')}
         />
     );
 };

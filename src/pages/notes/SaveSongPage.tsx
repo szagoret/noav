@@ -8,6 +8,7 @@ import {Autocomplete, Box, FormControl, Grid, Paper, TextField} from "@mui/mater
 import {DevTool} from "@hookform/devtools";
 import {LoadingButton} from '@mui/lab';
 import SongFilesForm from "src/components/SongFilesForm";
+import {useTranslation} from "react-i18next";
 
 interface IFormInput {
     title: string,
@@ -22,12 +23,11 @@ interface IFormInput {
 }
 
 const SaveSongPage = () => {
+    const {t} = useTranslation();
     const {songCode} = useParams();
 
     const {data: song, isFetching: isSongFetching} = useFindSongByCodeQuery(songCode as string, {skip: !songCode});
     const {data: songProperties, isFetching: isSongPropertiesFetching} = useFetchSongPropertiesQuery();
-
-    const isEditMode = !!songCode;
 
     const {control, handleSubmit} = useForm<IFormInput>({
         defaultValues: {...song}
@@ -67,7 +67,7 @@ const SaveSongPage = () => {
                                                 <TextField
                                                     {...field}
                                                     sx={{minWidth: 400}}
-                                                    label="Song Title"
+                                                    label={t('pages.songs.common.songTitle')}
                                                     variant="outlined"
                                                 />
                                             </FormControl>}
@@ -100,7 +100,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Topics"
+                                                            label={t('pages.songs.common.topics')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -136,7 +136,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Arrangers"
+                                                            label={t('pages.songs.common.arrangers')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -172,7 +172,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Composers"
+                                                            label={t('pages.songs.common.composers')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -208,7 +208,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Orchestrators"
+                                                            label={t('pages.songs.common.orchestrators')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -244,7 +244,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Vocals"
+                                                            label={t('pages.songs.common.vocals')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -280,7 +280,7 @@ const SaveSongPage = () => {
                                                         <TextField
                                                             {...params}
                                                             variant="outlined"
-                                                            label="Instruments"
+                                                            label={t('pages.songs.common.instruments')}
                                                             fullWidth
                                                         />
                                                     )}
@@ -295,7 +295,7 @@ const SaveSongPage = () => {
                                        variant="outlined"
                                        sx={{mt: 2}}
                                        onClick={handleSubmit(onSubmit)}>
-                            Save
+                            {t('common.save')}
                         </LoadingButton>
                     </form>
                     <DevTool control={control}/>

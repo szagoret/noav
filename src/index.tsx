@@ -8,6 +8,8 @@ import {BrowserRouter} from "react-router-dom";
 import {persistor, store} from "src/store/store";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -17,6 +19,7 @@ ReactDOM.render(
                     <CssBaseline/>
                     <BrowserRouter>
                         <App/>
+                        <ToastContainer/>
                     </BrowserRouter>
                 </ThemeProvider>
             </PersistGate>

@@ -5,14 +5,18 @@ import DeleteDialog from "src/pages/admin/DeleteDialog";
 import ItemAddDialog from "src/pages/admin/ItemAddDialog";
 import {Button} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
+import {trim} from 'lodash';
+import {useTranslation} from "react-i18next";
 
 
 interface EditToolbarProps {
     setAddDialogOpen: (open: boolean) => void;
+    title: string
 }
 
 const EditToolbar = (props: EditToolbarProps) => {
-    const {setAddDialogOpen} = props;
+    const {setAddDialogOpen, title} = props;
 
     const handleClick = () => {
         setAddDialogOpen(true);
@@ -21,7 +25,7 @@ const EditToolbar = (props: EditToolbarProps) => {
     return (
         <GridToolbarContainer>
             <Button color="primary" startIcon={<AddIcon/>} onClick={handleClick}>
-                Add record
+                {title}
             </Button>
         </GridToolbarContainer>
     );
@@ -38,7 +42,8 @@ interface GenericSongPropertyTableProps<T extends IdDrivenItem> {
     saveItem: (item: any) => Promise<any>,
     deleteItem: (id: string) => Promise<any>,
     valueKey: string,
-    valueLabel: string
+    valueLabel: string,
+    error?: FetchBaseQueryError
 }
 
 const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string>>({
@@ -54,8 +59,7 @@ const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string
         item: null
     });
     const [addDialogOpen, setAddDialogOpen] = useState<boolean>(false);
-
-
+    const {t} = useTranslation();
     const columns: GridColDef[] = [
         {field: valueKey, editable: true, headerName: valueLabel, flex: 1},
         {
@@ -65,10 +69,10 @@ const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string
             getActions: (params) => [
                 <GridActionsCellItem
                     icon={<DeleteIcon/>}
-                    label="Delete"
+                    label={t('common.delete')}
                     onClick={() => setDeleteDialogProps({
                         open: true,
-                        item: {id: params.id as string, [valueKey]: params.row.name} as T
+                        item: {id: params.id as string, [valueKey]: params.row[valueKey]} as T
                     })}
                 />
             ],
@@ -82,13 +86,19 @@ const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string
                       editMode={"cell"}
                       loading={loading}
                       onCellEditCommit={({field, id, value}, event, details) => {
-                          saveItem({id: id as string, [field]: value}).then();
+                          !!trim(value as string) && saveItem({
+                              id: id as string,
+                              [field]: trim(value as string)
+                          }).then();
                       }}
                       components={{
                           Toolbar: EditToolbar,
                       }}
                       componentsProps={{
-                          toolbar: {setAddDialogOpen},
+                          toolbar: {
+                              setAddDialogOpen,
+                              title: t('pages.songs.common.addSongProperty', {property: valueLabel})
+                          },
                       }}
             />
             {
@@ -105,7 +115,7 @@ const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string
             {
                 addDialogOpen &&
                 <ItemAddDialog open={addDialogOpen}
-                               onSave={(value: string) => saveItem({[valueKey]: value}).then(() => setAddDialogOpen(false))}
+                               onSave={(value: string) => !!trim(value as string) && saveItem({[valueKey]: trim(value as string)}).then(() => setAddDialogOpen(false))}
                                onClose={() => setAddDialogOpen(false)}/>
             }
         </div>

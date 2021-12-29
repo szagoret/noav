@@ -4,7 +4,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import {Box, Button, Drawer, Grid, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
+import {Box, Button, Divider, Drawer, Grid, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import SongAutoSuggest from "src/components/topbar/SongAutoSuggest";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
@@ -83,6 +83,10 @@ const TopBar = () => {
                     onKeyDown={toggleDrawer}
                 >
                     <List>
+                        <ListItem button component={RouterLink} to={'/'}>
+                            <ListItemText primary={t('brandTitle')}/>
+                        </ListItem>
+                        <Divider/>
                         {pages.map((text, index) => (
                             <ListItem button key={`${text}-${index}`}>
                                 <ListItemIcon>

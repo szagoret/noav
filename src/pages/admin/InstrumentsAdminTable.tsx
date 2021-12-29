@@ -4,12 +4,13 @@ import {
     useRemoveInstrumentMutation,
     useSaveInstrumentMutation
 } from "src/services/songInstrumentsApiService";
+import {useTranslation} from "react-i18next";
 
 const InstrumentsAdminTable = () => {
     const {data: instruments, isFetching} = useFindAllInstrumentsQuery();
     const [saveInstrument] = useSaveInstrumentMutation();
     const [removeInstrument] = useRemoveInstrumentMutation();
-
+    const {t} = useTranslation()
     return (
         <GenericSongPropertyTable
             items={instruments || []}
@@ -17,7 +18,7 @@ const InstrumentsAdminTable = () => {
             saveItem={saveInstrument}
             deleteItem={(id) => removeInstrument({instrumentId: id})}
             valueKey={'title'}
-            valueLabel={'Instrument'}
+            valueLabel={t('pages.songs.common.instrument')}
         />
     );
 };

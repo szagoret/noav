@@ -1,4 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, Typography} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
 interface DeleteDialogPropsTypes {
     open: boolean,
@@ -13,6 +14,7 @@ const DeleteDialog = ({
                           dialogTitle,
                           handleDeleteItem
                       }: DeleteDialogPropsTypes) => {
+    const {t} = useTranslation();
 
     return (
         <Dialog
@@ -23,18 +25,19 @@ const DeleteDialog = ({
         >
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Are you sure that you want to delete
-                    <Typography variant={'h6'} component="p">
+                    {t('common.deleteConfirmation')}
+                    <br/>
+                    <Typography variant={'h6'} component="span">
                         {dialogTitle}
                     </Typography>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleDeleteItem} color="primary">
-                    Yes
+                    {t('common.yes')}
                 </Button>
                 <Button onClick={handleClose} color="primary" autoFocus>
-                    No
+                    {t('common.no')}
                 </Button>
             </DialogActions>
         </Dialog>

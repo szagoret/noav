@@ -22,7 +22,7 @@ const SongsListView = ({data, loading}: SongsListViewProps) => {
         {
             field: "title",
             headerName: t('pages.songs.common.title'),
-            minWidth: 200,
+            minWidth: 300,
             sortable: false,
             filterable: false,
             disableColumnMenu: true

@@ -116,7 +116,7 @@ const SongsPage = () => {
                     to="/songs/new"
                     startIcon={<AddIcon/>}
                 >
-                    Add
+                    {t('pages.songs.common.addSong')}
                 </Button>
             </Box>
             {

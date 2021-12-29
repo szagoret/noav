@@ -1,5 +1,5 @@
-import {useFindSongByCodeQuery} from "src/services/songApiService";
-import {Link as RouterLink, useParams} from "react-router-dom";
+import {useFindSongByCodeQuery, useRemoveSongMutation} from "src/services/songApiService";
+import {Link as RouterLink, useNavigate, useParams} from "react-router-dom";
 import SongViewSkeleton from "src/pages/notes/SongViewSkeleton";
 import SongCoverImage from "src/components/SongCoverImage";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -9,6 +9,10 @@ import {
     Box,
     Button,
     Container,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
     Divider,
     Grid,
     IconButton,
@@ -30,10 +34,14 @@ import DownloadIcon from '@mui/icons-material/Download';
 import bytesToSize from "src/utils/bytesToSize";
 import SongFileIcon from "src/components/SongFileIcon";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 
 const SongPage = () => {
+    const {t} = useTranslation();
     const {songCode} = useParams();
     const {data, isFetching} = useFindSongByCodeQuery(songCode as string, {skip: !songCode});
+    const [removeSong, {isLoading: isDeleting}] = useRemoveSongMutation();
+    const navigate = useNavigate();
 
     const [open, setOpen] = useState(false);
 
@@ -47,7 +55,6 @@ const SongPage = () => {
     if (isFetching) {
         return (<SongViewSkeleton/>);
     }
-
     return (
         <Container maxWidth="xl">
             <Box mt={1}>
@@ -167,7 +174,7 @@ const SongPage = () => {
                                         to="/songs/new"
                                         startIcon={<AddIcon/>}
                                     >
-                                        Add
+                                        {t('common.edit')}
                                     </Button>
                                 </ListItem>
                                 <ListItem>
@@ -178,7 +185,7 @@ const SongPage = () => {
                                         to={`/songs/edit/${data?.code}`}
                                         startIcon={<EditIcon/>}
                                     >
-                                        Edit
+                                        {t('common.edit')}
                                     </Button>
                                 </ListItem>
                                 <ListItem>
@@ -189,7 +196,7 @@ const SongPage = () => {
                                         onClick={handleOpenRemoveDialog}
                                         startIcon={<DeleteIcon/>}
                                     >
-                                        Delete
+                                        {t('common.delete')}
                                     </Button>
                                 </ListItem>
                             </List>
@@ -197,6 +204,36 @@ const SongPage = () => {
                     </Grid>
                 </Grid>
             </Box>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {t('common.deleteConfirmation')}
+                        <br/>
+                        <Typography variant={'h6'} component="span">
+                            {data?.title}
+                        </Typography>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    {
+                        !!songCode &&
+                        <Button onClick={() => {
+                            removeSong({songCode}).finally(() => navigate("/"));
+                        }} color="primary" disabled={isDeleting}>
+                            {t('common.yes')}
+                        </Button>
+                    }
+
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                        {t('common.no')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     );
 }

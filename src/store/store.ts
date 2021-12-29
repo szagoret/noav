@@ -8,6 +8,7 @@ import songAdvancedFiltersReducer from "src/store/song/songAdvancedFiltersSlice"
 import {songApiService} from "src/services/songApiService";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {songFileApiService} from "src/services/songFileApiService";
+import {rtkQueryErrorMiddleware} from "src/store/rtkQueryErrorMiddleware";
 
 const persistConfig = {
     key: 'root',
@@ -33,7 +34,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(songApiService.middleware, songFileApiService.middleware)
+        }).concat(songApiService.middleware, songFileApiService.middleware, rtkQueryErrorMiddleware)
 });
 
 setupListeners(store.dispatch);

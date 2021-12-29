@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import FileDropZone from "src/components/FileDropZone";
 import {Box, Button, IconButton, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import bytesToSize from "src/utils/bytesToSize";
@@ -8,6 +8,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import {useSaveSongFileMutation} from "src/services/songFileApiService";
+import {useTranslation} from "react-i18next";
 
 interface UploadSongFilesFormPropsTypes {
     songCode: string
@@ -18,7 +19,7 @@ type WrappedFile = {
     localId: string
 }
 const UploadSongFilesForm = ({songCode}: UploadSongFilesFormPropsTypes) => {
-
+    const {t} = useTranslation();
     const [saveSongFile, {isLoading: isUpdating}] = useSaveSongFileMutation()
 
     const [unsavedFiles, setUnsavedFiles] = useState<WrappedFile[]>([]);
@@ -78,7 +79,7 @@ const UploadSongFilesForm = ({songCode}: UploadSongFilesFormPropsTypes) => {
                 !!unsavedFiles.length &&
                 <div>
                     <Button onClick={handleRemoveAll} size="small">
-                        Remove all
+                        {t('pages.songs.common.removeAll')}
                     </Button>
                     <LoadingButton
                         loadingPosition="start"
@@ -86,7 +87,7 @@ const UploadSongFilesForm = ({songCode}: UploadSongFilesFormPropsTypes) => {
                         variant="outlined"
                         onClick={() => uploadSongFiles()}
                     >
-                        Upload files
+                        {t('pages.songs.common.uploadFiles')}
                     </LoadingButton>
                 </div>
             }

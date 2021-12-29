@@ -11,17 +11,20 @@ export const songApiService = baseApiService.injectEndpoints({
                 url: `/song/find`,
                 params: {searchTerm}
             }),
+            providesTags: ['Songs']
         }),
         findSongByCode: build.query<SongType, String>({
             query: (songCode) => ({
                 url: `/song/${songCode}`
-            })
+            }),
+            providesTags: ['Songs']
         }),
         advancedSongSearch: build.query<PaginatedResultType<SongType>, SongSearchQueryType>({
             query: (searchQuery) => ({
                 url: `/song/search`,
                 params: {...searchQuery}
-            })
+            }),
+            providesTags: ['Songs']
         }),
         fetchSongProperties: build.query<SongPropertiesType, void>({
             query: () => ({
@@ -36,7 +39,17 @@ export const songApiService = baseApiService.injectEndpoints({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['Songs']
+        }),
+        removeSong: build.mutation<void, { songCode: string }>({
+            query({songCode}) {
+                return {
+                    url: `/song/${songCode}`,
+                    method: 'DELETE'
+                }
+            },
+            invalidatesTags: ['Songs']
         })
     }),
     overrideExisting: false,
@@ -48,4 +61,5 @@ export const {
     useAdvancedSongSearchQuery,
     useFetchSongPropertiesQuery,
     useSaveSongMutation,
+    useRemoveSongMutation
 } = songApiService;

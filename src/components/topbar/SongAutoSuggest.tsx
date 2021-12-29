@@ -7,6 +7,7 @@ import {SongType} from "src/types/SongType";
 import {useSearchSongByNameQuery} from "src/services/songApiService";
 import {debounce} from 'lodash';
 import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 
 const SongAutoSuggest = () => {
@@ -14,6 +15,7 @@ const SongAutoSuggest = () => {
     const handleOnInputChange = debounce(setSearchTerm, 300);
     const {data, isLoading} = useSearchSongByNameQuery(searchTerm, {skip: !searchTerm});
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const Search = styled('div')(({theme}) => ({
         position: 'relative',
@@ -85,7 +87,7 @@ const SongAutoSuggest = () => {
                                       <SearchIcon/>
                                   </SearchIconWrapper>
                                   <StyledInputBase ref={params.InputProps.ref}
-                                                   placeholder="Caută…"
+                                                   placeholder={t('pages.songs.common.searchPlaceholder')}
                                                    autoFocus
                                                    inputProps={{
                                                        'aria-label': 'search',
