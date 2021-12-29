@@ -7,6 +7,7 @@ export const songTopicsApiService = baseApiService.injectEndpoints({
             query: (topicId) => ({
                 url: `/song/topics/${topicId}`
             }),
+            providesTags: ['SongTopics']
         }),
         findAllTopics: build.query<Array<IdTitleType>, void>({
             query: () => ({
@@ -20,7 +21,8 @@ export const songTopicsApiService = baseApiService.injectEndpoints({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['SongTopics']
         }),
         removeTopic: build.mutation<void, { topicId: string }>({
             query({topicId}) {
@@ -28,7 +30,8 @@ export const songTopicsApiService = baseApiService.injectEndpoints({
                     url: `/song/topics/${topicId}`,
                     method: 'DELETE'
                 }
-            }
+            },
+            invalidatesTags: ['SongTopics']
         })
     }),
     overrideExisting: false,

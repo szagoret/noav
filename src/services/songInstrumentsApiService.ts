@@ -12,6 +12,7 @@ export const songInstrumentsApiService = baseApiService.injectEndpoints({
             query: () => ({
                 url: `/song/instruments`
             }),
+            providesTags: ['SongInstruments']
         }),
         saveInstrument: build.mutation<void, Partial<IdTitleType>>({
             query(body) {
@@ -20,7 +21,8 @@ export const songInstrumentsApiService = baseApiService.injectEndpoints({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['SongInstruments']
         }),
         removeInstrument: build.mutation<void, { instrumentId: string }>({
             query({instrumentId}) {
@@ -28,7 +30,8 @@ export const songInstrumentsApiService = baseApiService.injectEndpoints({
                     url: `/song/instruments/${instrumentId}`,
                     method: 'DELETE'
                 }
-            }
+            },
+            invalidatesTags: ['SongInstruments']
         })
     }),
     overrideExisting: false,

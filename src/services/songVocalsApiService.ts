@@ -7,6 +7,7 @@ export const songVocalsApiService = baseApiService.injectEndpoints({
             query: (vocalId) => ({
                 url: `/song/vocals/${vocalId}`
             }),
+            providesTags: ['SongVocals']
         }),
         findAllVocals: build.query<Array<IdTitleType>, void>({
             query: () => ({
@@ -20,7 +21,8 @@ export const songVocalsApiService = baseApiService.injectEndpoints({
                     method: 'POST',
                     body,
                 }
-            }
+            },
+            invalidatesTags: ['SongVocals']
         }),
         removeVocal: build.mutation<void, { vocalId: string }>({
             query({vocalId}) {
@@ -28,7 +30,8 @@ export const songVocalsApiService = baseApiService.injectEndpoints({
                     url: `/song/vocals/${vocalId}`,
                     method: 'DELETE'
                 }
-            }
+            },
+            invalidatesTags: ['SongVocals']
         })
     }),
     overrideExisting: false,
