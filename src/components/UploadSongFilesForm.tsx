@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import {uuid} from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 import FileDropZone from "src/components/FileDropZone";
 import {Box, Button, IconButton, List, ListItem, ListItemIcon, ListItemText} from "@mui/material";
 import bytesToSize from "src/utils/bytesToSize";
@@ -26,7 +26,7 @@ const UploadSongFilesForm = ({songCode}: UploadSongFilesFormPropsTypes) => {
     const handleDrop = useCallback((acceptedFiles) => {
         const wrappedFiles = acceptedFiles.map((file: File) => ({
             file,
-            localId: uuid()
+            localId: uuidv4()
         }));
         setUnsavedFiles((prevFiles) => [...prevFiles].concat(wrappedFiles));
     }, []);

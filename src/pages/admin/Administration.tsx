@@ -8,6 +8,8 @@ import {useTranslation} from "react-i18next";
 import InstrumentsTable from "src/pages/admin/InstrumentsTable";
 import VocalsTable from "src/pages/admin/VocalsTable";
 import TopicsTable from "src/pages/admin/TopicsTable";
+import AuthorsManageTable from "src/pages/admin/AuthorsManageTable";
+import AuthorsMuiTable from "src/pages/admin/AuthorsMuiTable";
 
 const Administration = () => {
     const {t} = useTranslation();
@@ -21,16 +23,18 @@ const Administration = () => {
             <TabContext value={value}>
                 <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label={t('pages.songs.common.instruments')} value="1"/>
-                        <Tab label={t('pages.songs.common.topics')} value="2"/>
-                        <Tab label={t('pages.songs.common.vocals')} value="3"/>
-                        <Tab label={t('pages.songs.common.authors')} value="4"/>
+                        <Tab disableRipple label={t('pages.songs.common.instruments')} value="1"/>
+                        <Tab disableRipple label={t('pages.songs.common.topics')} value="2"/>
+                        <Tab disableRipple label={t('pages.songs.common.vocals')} value="3"/>
+                        <Tab disableRipple label={t('pages.songs.common.authors')} value="4"/>
+                        <Tab label={t('pages.songs.common.authors')} value="5"/>
                     </TabList>
                 </Box>
                 <TabPanel value="1" sx={{p: 0, pt: 1}}><InstrumentsTable/></TabPanel>
                 <TabPanel value="2" sx={{p: 0, pt: 1}}><TopicsTable/></TabPanel>
                 <TabPanel value="3" sx={{p: 0, pt: 1}}><VocalsTable/></TabPanel>
-                <TabPanel value="4">{t('pages.songs.common.authors')}</TabPanel>
+                <TabPanel value="4" sx={{p: 0, pt: 1}}><AuthorsManageTable/></TabPanel>
+                <TabPanel value="5" sx={{p: 0, pt: 1}}><AuthorsMuiTable/></TabPanel>
             </TabContext>
         </Box>
     );
