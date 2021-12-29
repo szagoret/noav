@@ -300,13 +300,17 @@ const SaveSongPage = () => {
                     </form>
                     <DevTool control={control}/>
                 </Grid>
-                <Grid item xs={12} md={5} lg={5} sx={{
-                    p: 1,
-                    m: 1
-                }} component={Paper}>
-                    <SongFilesForm songCode={song?.code || ''}/>
-                </Grid>
+                {
+                    song?.code &&
+                    <Grid item xs={12} md={5} lg={5} sx={{
+                        p: 1,
+                        m: 1
+                    }} component={Paper}>
+                        <SongFilesForm songCode={song?.code}/>
+                    </Grid>
+                }
             </Grid>
+
 
         </>
     );

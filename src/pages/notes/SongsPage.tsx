@@ -3,6 +3,7 @@ import {useAdvancedSongSearchQuery} from "src/services/songApiService";
 import {map} from "lodash";
 import {
     Box,
+    Button,
     FormControl,
     InputLabel,
     MenuItem,
@@ -27,6 +28,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import {useTranslation} from "react-i18next";
 import SongsGridView from "src/pages/notes/SongsGridView";
 import SongsListView from "src/pages/notes/SongsListView";
+import {Link as RouterLink} from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 
 const SongsPage = () => {
     const {
@@ -106,6 +109,15 @@ const SongsPage = () => {
                         <ViewModuleIcon/>
                     </ToggleButton>
                 </ToggleButtonGroup>
+                <Button
+                    variant={"text"}
+                    size={"medium"}
+                    component={RouterLink}
+                    to="/songs/new"
+                    startIcon={<AddIcon/>}
+                >
+                    Add
+                </Button>
             </Box>
             {
                 viewMode === 'grid' ?

@@ -164,7 +164,7 @@ const SongPage = () => {
                                         variant="outlined"
                                         size="small"
                                         component={RouterLink}
-                                        to="/notes/add"
+                                        to="/songs/new"
                                         startIcon={<AddIcon/>}
                                     >
                                         Add
