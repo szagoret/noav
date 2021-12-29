@@ -79,7 +79,7 @@ const GenericSongPropertyTable = <T extends IdDrivenItem & Record<string, string
         <div style={{height: 600, width: '100%'}}>
             <DataGrid rows={items || []}
                       columns={columns}
-                      editMode={"row"}
+                      editMode={"cell"}
                       loading={loading}
                       onCellEditCommit={({field, id, value}, event, details) => {
                           saveItem({id: id as string, [field]: value}).then();
