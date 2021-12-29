@@ -4,10 +4,8 @@ import {map} from "lodash";
 import {
     Box,
     FormControl,
-    Grid,
     InputLabel,
     MenuItem,
-    Pagination,
     Select,
     SelectChangeEvent,
     ToggleButton,
@@ -16,7 +14,6 @@ import {
 } from "@mui/material";
 import AdvancedFilters from "src/components/AdvancedFilters";
 import {
-    setPageFilter,
     setPageSizeFilter,
     setSortFieldFilter,
     toggleSortDirection,
@@ -24,12 +21,12 @@ import {
 } from "src/store/song/songAdvancedFiltersSlice";
 import ListIcon from "@mui/icons-material/List";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import SongCard from "src/components/SongCard";
 import React from "react";
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import SongsPageGridSkeleton from "src/pages/notes/SongsPageGridSkeleton";
 import {useTranslation} from "react-i18next";
+import SongsGridView from "src/pages/notes/SongsGridView";
+import SongsListView from "src/pages/notes/SongsListView";
 
 const SongsPage = () => {
     const {
@@ -80,10 +77,10 @@ const SongsPage = () => {
                     <InputLabel id="demo-simple-select-label">Page size</InputLabel>
                     <Select labelId="demo-simple-select-label1"
                             id="demo-simple-select1"
-                            value={((size || 20).toString())}
+                            value={((size || 25).toString())}
                             label={t('pages.songs.toolbar.pageSize')}
                             onChange={(event: SelectChangeEvent) => dispatch(setPageSizeFilter(event.target.value))}>
-                        <MenuItem value={20}>20</MenuItem>
+                        <MenuItem value={25}>25</MenuItem>
                         <MenuItem value={50}>50</MenuItem>
                         <MenuItem value={100}>100</MenuItem>
                     </Select>
@@ -111,25 +108,12 @@ const SongsPage = () => {
                 </ToggleButtonGroup>
             </Box>
             {
-                isFetching && (
-                    <Grid container spacing={1} sx={{pb: 2, pt: 2}}>
-                        <SongsPageGridSkeleton/>
-                    </Grid>)
+                data && (viewMode === 'grid' ?
+                    <SongsGridView data={data} loading={isFetching}/>
+                    : <SongsListView data={data} loading={isFetching}/>)
             }
-            <Grid container spacing={1} sx={{pb: 2, pt: 2}}>
-                {data?.content.map((song, i) => (
-                    <Grid item key={i} xs={12} md={4} lg={3}>
-                        <SongCard song={song}/>
-                    </Grid>
-                ))}
-            </Grid>
-            <Box sx={{display: 'flex', justifyContent: 'center', p: 2}}>
-                <Pagination count={data?.totalPages || 1}
-                            onChange={(event: React.ChangeEvent<unknown>, pageNumber: number) => dispatch(setPageFilter(pageNumber - 1))}/>
-            </Box>
         </Box>
-    )
-        ;
+    );
 }
 
 export default SongsPage;

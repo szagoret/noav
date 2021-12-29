@@ -9,7 +9,7 @@ const DefaultLayout = () => {
     return (
         <Box sx={{backgroundColor: '#f4f6f8'}}>
             <TopBar/>
-            <Container sx={{minHeight: '400px', pt: 3, mb: 3}}>
+            <Container sx={{minHeight: '400px', pt: 3, mb: 3}} maxWidth={"xl"}>
                 <Outlet/>
             </Container>
         </Box>

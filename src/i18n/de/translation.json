@@ -4,6 +4,8 @@
     "songs": {
       "title": "NOTES",
       "common": {
+        "title": "Title",
+        "publishDate": "Publish Date",
         "instruments": "Instruments",
         "topics": "Topics",
         "vocals": "Vocals",

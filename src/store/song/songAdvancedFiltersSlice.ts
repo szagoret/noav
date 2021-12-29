@@ -25,7 +25,7 @@ const initialState: SongAdvancedFiltersSliceState = {
     arrangers: [],
     orchestrators: [],
     page: 0,
-    size: 20,
+    size: 25,
     sortField: 'publishDate',
     sortDirection: 'DESC',
     viewMode: "grid"
