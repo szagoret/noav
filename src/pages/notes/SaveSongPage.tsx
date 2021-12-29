@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFetchSongPropertiesQuery, useFindSongByCodeQuery, useSaveSongMutation} from "src/services/songApiService";
 import SongViewSkeleton from "src/pages/notes/SongViewSkeleton";
 import {IdNameType} from "src/types/IdNameType";
@@ -25,6 +25,7 @@ interface IFormInput {
 const SaveSongPage = () => {
     const {t} = useTranslation();
     const {songCode} = useParams();
+    const navigate = useNavigate();
 
     const {data: song, isFetching: isSongFetching} = useFindSongByCodeQuery(songCode as string, {skip: !songCode});
     const {data: songProperties, isFetching: isSongPropertiesFetching} = useFetchSongPropertiesQuery();
@@ -35,7 +36,13 @@ const SaveSongPage = () => {
 
     const [saveSong, {isLoading}] = useSaveSongMutation();
 
-    const onSubmit: SubmitHandler<IFormInput> = data => saveSong({...data, code: songCode});
+    const onSubmit: SubmitHandler<IFormInput> = data => {
+        saveSong({...data, code: songCode}).unwrap().then(payload => {
+            if (!songCode) {
+                navigate(`/songs/edit/${payload.code}`);
+            }
+        });
+    };
 
     if (isSongFetching || isSongPropertiesFetching) {
         return (<SongViewSkeleton/>);
