@@ -13,6 +13,7 @@ export const songVocalsApiService = baseApiService.injectEndpoints({
             query: () => ({
                 url: `/song/vocals`
             }),
+            providesTags: ['SongVocals']
         }),
         saveVocal: build.mutation<void, Partial<IdTitleType>>({
             query(body) {
