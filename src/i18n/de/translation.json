@@ -16,6 +16,9 @@
       "1": "Etwas stimmte nicht"
     }
   },
+  "auth": {
+    "login": "Anmeldung"
+  },
   "pages": {
     "songs": {
       "title": "NOTES",

@@ -12,6 +12,7 @@ import {Link as RouterLink, useNavigate} from "react-router-dom";
 import SettingsIcon from '@mui/icons-material/Settings';
 import {useTranslation} from "react-i18next";
 import RequireAuth from "src/components/auth/RequireAuth";
+import LogoutButton from "src/components/auth/LogoutButton";
 
 const TopBar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
@@ -74,6 +75,7 @@ const TopBar = () => {
                             <SettingsIcon/>
                         </IconButton>
                     </RequireAuth>
+                    <LogoutButton/>
                 </Toolbar>
             </AppBar>
             <Drawer

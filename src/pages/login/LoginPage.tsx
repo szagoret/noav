@@ -1,4 +1,4 @@
-import {Box, Container, FormControl, Grid, TextField} from "@mui/material";
+import {Box, Container, FormControl, Grid, TextField, Typography} from "@mui/material";
 import {Controller, SubmitHandler, useForm} from "react-hook-form";
 import {LoginRequest, useLoginMutation} from "src/services/authApiService";
 import {useAppDispatch} from "src/hooks/reduxHooks";
@@ -6,10 +6,12 @@ import {toast} from "react-toastify";
 import {useNavigate} from "react-router-dom";
 import {setCredentials} from "src/store/auth/authSlice";
 import {LoadingButton} from "@mui/lab";
+import {useTranslation} from "react-i18next";
 
 const LoginPage = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     const [login, {isLoading}] = useLoginMutation();
 
@@ -38,12 +40,23 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid
                     container
-                    spacing={3}>
+                    spacing={3}
+                >
+                    <Grid item xs={12}>
+                        <Typography variant={"h4"} sx={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}>{t('auth.login')}</Typography>
+                    </Grid>
                     <Grid item xs={12}>
                         <Box
                             display="flex"
                             alignItems="center"
                             flexWrap="wrap"
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}
                         >
                             <Controller
                                 name="username"
@@ -54,6 +67,7 @@ const LoginPage = () => {
                                             {...field}
                                             sx={{minWidth: 100}}
                                             variant="outlined"
+                                            placeholder={'username'}
                                         />
                                     </FormControl>}
                             />
@@ -64,6 +78,10 @@ const LoginPage = () => {
                             display="flex"
                             alignItems="center"
                             flexWrap="wrap"
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}
                         >
                             <Controller
                                 name="password"
@@ -75,18 +93,26 @@ const LoginPage = () => {
                                             sx={{minWidth: 100}}
                                             type={'password'}
                                             variant="outlined"
+                                            placeholder={'password'}
                                         />
                                     </FormControl>}
                             />
                         </Box>
                     </Grid>
+                    <Grid item xs={12} sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
+                        <LoadingButton loading={isLoading}
+                                       variant="contained"
+                                       sx={{
+                                           mt: 2
+                                       }}
+                                       onClick={handleSubmit(onSubmit)}>
+                            {t('auth.login')}
+                        </LoadingButton>
+                    </Grid>
                 </Grid>
-                <LoadingButton loading={isLoading}
-                               variant="outlined"
-                               sx={{mt: 2}}
-                               onClick={handleSubmit(onSubmit)}>
-                    {'Login'}
-                </LoadingButton>
             </form>
         </Container>
     );
