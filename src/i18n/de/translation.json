@@ -8,6 +8,8 @@
     "yes": "Ja",
     "no": "Nein",
     "delete": "Löschen",
+    "next": "Nächste",
+    "back": "Zurück",
     "errors": {
       "reference_constraint_error": "Konnte nicht entfernt werden, dieses Element wird verwendet",
       "invalid_object_id": "Die angegebene ID ist ungültig",

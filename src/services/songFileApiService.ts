@@ -31,21 +31,21 @@ export const songFileApiService = baseApiService.injectEndpoints({
                 params: {isPrimary},
                 body: {}
             }),
-            invalidatesTags: ['SongFiles']
+            invalidatesTags: ['SongFiles', 'Songs']
         }),
         createFileThumbnail: build.mutation<void, { songCode: string, fileCode: string }>({
             query: ({songCode, fileCode}) => ({
                 url: `/song/${songCode}/files/${fileCode}/thumbs`,
                 method: 'POST'
             }),
-            invalidatesTags: ['SongFiles']
+            invalidatesTags: ['SongFiles', 'Songs']
         }),
         deleteSongFile: build.mutation<void, { songCode: string, fileCode: string }>({
             query: ({songCode, fileCode}) => ({
                 url: `/song/${songCode}/files/${fileCode}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: ['SongFiles']
+            invalidatesTags: ['SongFiles', 'Songs']
         })
     }),
     overrideExisting: false
