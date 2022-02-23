@@ -30,6 +30,7 @@ import SongsGridView from "src/pages/notes/SongsGridView";
 import SongsListView from "src/pages/notes/SongsListView";
 import {Link as RouterLink} from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
+import RequireAuth from "src/components/auth/RequireAuth";
 
 const SongsPage = () => {
     const {
@@ -109,15 +110,17 @@ const SongsPage = () => {
                         <ViewModuleIcon/>
                     </ToggleButton>
                 </ToggleButtonGroup>
-                <Button
-                    variant={"text"}
-                    size={"medium"}
-                    component={RouterLink}
-                    to="/songs/new"
-                    startIcon={<AddIcon/>}
-                >
-                    {t('pages.songs.common.addSong')}
-                </Button>
+                <RequireAuth>
+                    <Button
+                        variant={"text"}
+                        size={"medium"}
+                        component={RouterLink}
+                        to="/songs/new"
+                        startIcon={<AddIcon/>}
+                    >
+                        {t('pages.songs.common.addSong')}
+                    </Button>
+                </RequireAuth>
             </Box>
             {
                 viewMode === 'grid' ?

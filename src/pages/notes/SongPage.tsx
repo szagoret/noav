@@ -35,6 +35,7 @@ import bytesToSize from "src/utils/bytesToSize";
 import SongFileIcon from "src/components/SongFileIcon";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
+import RequireAuth from "src/components/auth/RequireAuth";
 
 const SongPage = () => {
     const {t} = useTranslation();
@@ -159,48 +160,50 @@ const SongPage = () => {
                                 </ListItem>
                             ))}
                         </List>
-                        <Paper>
-                            <List
-                                subheader={(
-                                    <ListSubheader component="div" id="nested-list-subheader">
-                                        Actions
-                                    </ListSubheader>
-                                )}>
-                                <ListItem>
-                                    <Button
-                                        variant="outlined"
-                                        size="small"
-                                        component={RouterLink}
-                                        to="/songs/new"
-                                        startIcon={<AddIcon/>}
-                                    >
-                                        {t('common.edit')}
-                                    </Button>
-                                </ListItem>
-                                <ListItem>
-                                    <Button
-                                        variant="outlined"
-                                        size="small"
-                                        component={RouterLink}
-                                        to={`/songs/edit/${data?.code}`}
-                                        startIcon={<EditIcon/>}
-                                    >
-                                        {t('common.edit')}
-                                    </Button>
-                                </ListItem>
-                                <ListItem>
-                                    <Button
-                                        variant="outlined"
-                                        size="small"
-                                        color="primary"
-                                        onClick={handleOpenRemoveDialog}
-                                        startIcon={<DeleteIcon/>}
-                                    >
-                                        {t('common.delete')}
-                                    </Button>
-                                </ListItem>
-                            </List>
-                        </Paper>
+                        <RequireAuth>
+                            <Paper>
+                                <List
+                                    subheader={(
+                                        <ListSubheader component="div" id="nested-list-subheader">
+                                            Actions
+                                        </ListSubheader>
+                                    )}>
+                                    <ListItem>
+                                        <Button
+                                            variant="outlined"
+                                            size="small"
+                                            component={RouterLink}
+                                            to="/songs/new"
+                                            startIcon={<AddIcon/>}
+                                        >
+                                            {t('common.edit')}
+                                        </Button>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Button
+                                            variant="outlined"
+                                            size="small"
+                                            component={RouterLink}
+                                            to={`/songs/edit/${data?.code}`}
+                                            startIcon={<EditIcon/>}
+                                        >
+                                            {t('common.edit')}
+                                        </Button>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Button
+                                            variant="outlined"
+                                            size="small"
+                                            color="primary"
+                                            onClick={handleOpenRemoveDialog}
+                                            startIcon={<DeleteIcon/>}
+                                        >
+                                            {t('common.delete')}
+                                        </Button>
+                                    </ListItem>
+                                </List>
+                            </Paper>
+                        </RequireAuth>
                     </Grid>
                 </Grid>
             </Box>

@@ -11,11 +11,13 @@ import MailIcon from '@mui/icons-material/Mail';
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import SettingsIcon from '@mui/icons-material/Settings';
 import {useTranslation} from "react-i18next";
+import RequireAuth from "src/components/auth/RequireAuth";
 
 const TopBar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const {t} = useTranslation();
-    const pages = [t('pages.songs.title'), t('pages.learning.title'), t('pages.photos.title')];
+    // const pages = [t('pages.songs.title'), t('pages.learning.title'), t('pages.photos.title')];
+    const pages: Array<string> = [];
     const navigate = useNavigate();
 
     const toggleDrawer = () => setIsDrawerOpen(prev => !prev);
@@ -61,15 +63,17 @@ const TopBar = () => {
                             </Button>
                         ))}
                     </Box>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ml: 2}}
-                        onClick={() => navigate("/admin")}>
-                        <SettingsIcon/>
-                    </IconButton>
+                    <RequireAuth>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="menu"
+                            sx={{ml: 2}}
+                            onClick={() => navigate("/admin")}>
+                            <SettingsIcon/>
+                        </IconButton>
+                    </RequireAuth>
                 </Toolbar>
             </AppBar>
             <Drawer
